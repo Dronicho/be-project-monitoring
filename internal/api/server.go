@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"os"
 
 	"github.com/google/uuid"
 
@@ -55,9 +56,10 @@ type (
 )
 
 func New(opts ...OptionFunc) *Server {
+	port := os.Getenv("PORT")
 	s := &Server{
 		Server: &http.Server{
-			Addr:         ":8080",
+			Addr:         ":" + port,
 			ReadTimeout:  time.Duration(10) * time.Second,
 			WriteTimeout: time.Duration(10) * time.Second},
 	}
